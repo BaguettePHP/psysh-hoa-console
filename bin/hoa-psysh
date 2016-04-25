@@ -1,0 +1,28 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Psysh using Hoa\Console readline
+ *
+ * @author    USAMI Kenta <tadsan@zonu.me>
+ * @copyright 2016 USAMI Kenta
+ * @license   https://www.mozilla.org/en-US/MPL/2.0/ MPL-2.0
+ */
+
+namespace zonuexe;
+
+use zonuexe\Psy\Readline\HoaConsoleAdapter;
+
+foreach (array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        require_once $file;
+        break;
+    }
+}
+
+echo 'Hoa\Console Test Shell', PHP_EOL;
+$config = new \Psy\Configuration;
+$config->setReadline(new HoaConsoleAdapter);
+$sh = new \Psy\Shell($config);
+
+$sh->run();
