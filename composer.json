@@ -2,14 +2,16 @@
     "name": "zonuexe/psysh-hoa-console",
     "description": "PsySH using Hoa\\Console readline library.",
     "license": "MPL-2.0",
-    "authors": {
-        "name": "USAMI Kenta",
-        "email": "tadsan@zonu.me",
-        "homepage": "https://tadsan.github.io/",
-        "role": "Developer"
-    },
+    "authors": [
+        {
+            "name": "USAMI Kenta",
+            "email": "tadsan@zonu.me",
+            "homepage": "https://tadsan.github.io/",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "hoa/console": "3.16.01.14",
+        "hoa/console": "~3.16|~1.14",
         "psy/psysh": "^0.7.2"
     },
     "autoload": {
