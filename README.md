@@ -28,9 +28,10 @@ use Psy\Readline\GNUReadline;
 use Psy\Readline\Libedit;
 use zonuexe\Psy\Readline\HoaConsoleAdapter;
 
+$is_dumb = !isset($_ENV['TERM']) || ($_ENV['TERM'] === 'dumb');
 $config = new \Psy\Configuration;
 
-if (!GNUReadline::isSupported() && !Libedit::isSupported()) {
+if (!$is_dump && !GNUReadline::isSupported() && !Libedit::isSupported()) {
     $config->setReadline(new HoaConsoleAdapter);
 }
 
