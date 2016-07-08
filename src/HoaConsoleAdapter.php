@@ -2,10 +2,8 @@
 
 namespace zonuexe\Psy\Readline;
 
-use Psy\Readline\Readline;
-use Psy\Exception\BreakException;
-use Hoa\Console\Console;
 use Hoa\Console\Readline\Readline as HoaReadline;
+use Psy\Exception\BreakException;
 
 /**
  * Hoa\Console Readline implementation.
@@ -17,10 +15,7 @@ use Hoa\Console\Readline\Readline as HoaReadline;
 class HoaConsoleAdapter implements Readline
 {
     /** @var HoaReadline */
-    private $hoa_readline;
-
-    /** @var \ReflectionProperty */
-    private $reflection;
+    private $hoaReadline;
 
     /**
      * @return bool
@@ -32,8 +27,7 @@ class HoaConsoleAdapter implements Readline
 
     public function __construct()
     {
-        $this->hoa_readline = new HoaReadline();
-        $this->reflection = new \ReflectionProperty($this->hoa_readline, '_history');
+        $this->hoaReadline = new HoaReadline();
     }
 
     /**
@@ -41,7 +35,7 @@ class HoaConsoleAdapter implements Readline
      */
     public function addHistory($line)
     {
-        $this->hoa_readline->addHistory($line);
+        $this->hoaReadline->addHistory($line);
 
         return true;
     }
@@ -51,7 +45,7 @@ class HoaConsoleAdapter implements Readline
      */
     public function clearHistory()
     {
-        $this->hoa_readline->clearHistory();
+        $this->hoaReadline->clearHistory();
 
         return true;
     }
@@ -61,9 +55,11 @@ class HoaConsoleAdapter implements Readline
      */
     public function listHistory()
     {
-        $this->reflection->setAccessible(true);
-        $list = $this->reflection->getValue($this->hoa_readline);
-        $this->reflection->setAccessible(false);
+        $i = 0;
+        $list = array();
+        while (($item = $this->hoaReadline->getHistory($i++)) !== null) {
+            $list[] = $item;
+        }
 
         return $list;
     }
@@ -85,7 +81,7 @@ class HoaConsoleAdapter implements Readline
      */
     public function readline($prompt = null)
     {
-        return $this->hoa_readline->readLine($prompt);
+        return $this->hoaReadline->readLine($prompt);
     }
 
     /**
@@ -102,17 +98,5 @@ class HoaConsoleAdapter implements Readline
     public function writeHistory()
     {
         return true;
-    }
-
-    /**
-     * Get a STDIN file handle.
-     *
-     * @throws BreakException if user hits Ctrl+D
-     *
-     * @return resource
-     */
-    private function getStdin()
-    {
-        return Console::getInput()->getStream()->getStream();
     }
 }
