@@ -12,7 +12,7 @@ use Psy\Exception\BreakException;
  * @copyright 2016 USAMI Kenta
  * @license   https://www.mozilla.org/en-US/MPL/2.0/ MPL-2.0
  */
-class HoaConsoleAdapter implements Readline
+class HoaConsoleAdapter implements \Psy\Readline\Readline
 {
     /** @var HoaReadline */
     private $hoaReadline;
