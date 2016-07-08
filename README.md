@@ -5,7 +5,11 @@ PsySH Hoa\Consle
 
 ## Notice
 
-I hope that the code of this library is integrated into PsySH. [Pull Request #300 · bobthecow/psysh](https://github.com/bobthecow/psysh/pull/300)
+**This project will be abandoned in the future (after `psy/psysh` next major release).**
+
+You can use this package in `psy/psysh:0.7.2` or *earlier*.
+
+This code is integrated into PsySH. ([Pull Request #300 · bobthecow/psysh](https://github.com/bobthecow/psysh/pull/300) is merged.)
 
 ## Setup
 
