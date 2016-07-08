@@ -2,6 +2,7 @@
 
 namespace zonuexe\Psy\Readline;
 
+use Hoa\Console\Cursor;
 use Hoa\Console\Readline\Readline as HoaReadline;
 use Psy\Exception\BreakException;
 
@@ -17,6 +18,9 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
     /** @var HoaReadline */
     private $hoaReadline;
 
+    /** @var string */
+    private $lastPrompt;
+
     /**
      * @return bool
      */
@@ -28,6 +32,7 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
     public function __construct()
     {
         $this->hoaReadline = new HoaReadline();
+        $this->hoaReadline->addMapping('\C-l', [$this, 'redisplay']);
     }
 
     /**
@@ -81,6 +86,8 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
      */
     public function readline($prompt = null)
     {
+        $this->lastPrompt = $prompt;
+
         return $this->hoaReadline->readLine($prompt);
     }
 
@@ -89,7 +96,9 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
      */
     public function redisplay()
     {
-        // noop
+        $current_line = $this->hoaReadline->getLine();
+        Cursor::clear('all');
+        echo $this->lastPrompt, $current_line;
     }
 
     /**
