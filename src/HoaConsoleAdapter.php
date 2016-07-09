@@ -32,7 +32,7 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
     public function __construct()
     {
         $this->hoaReadline = new HoaReadline();
-        $this->hoaReadline->addMapping('\C-l', [$this, 'redisplay']);
+        $this->hoaReadline->addMapping('\C-l', array($this, 'redisplay'));
     }
 
     /**
