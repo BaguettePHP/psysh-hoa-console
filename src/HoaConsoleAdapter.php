@@ -98,7 +98,9 @@ class HoaConsoleAdapter implements \Psy\Readline\Readline
     {
         $current_line = $this->hoaReadline->getLine();
         Cursor::clear('all');
+        //Cursor::moveTo(0, 0);
         echo $this->lastPrompt, $current_line;
+        Cursor::moveTo(mb_strlen($this->lastPrompt) + mb_strlen($current_line) + 1, 0);
     }
 
     /**
