@@ -12,7 +12,7 @@
     ],
     "require": {
         "hoa/console": "~3.16|~1.14",
-        "psy/psysh": "<=0.7.2|dev-master|dev-develop"
+        "psy/psysh": "*"
     },
     "autoload": {
         "psr-4": {
